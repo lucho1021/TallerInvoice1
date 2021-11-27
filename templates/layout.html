@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>{% block title %}{% endblock %}</title>
+		<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+	</head>
+	<body class="loggedin">
+		<nav class="navtop">
+			<div>
+				<h1>Web Invoice</h1>
+				<a href="{{ url_for('indexFac') }}"><i class="fad fa-users"></i>Facturas</a>
+				<a href="{{ url_for('indexCli') }}"><i class="fad fa-users"></i>Clientes</a>
+                <a href="{{ url_for('home') }}"><i class="fas fa-home"></i>Home</a>
+				<a href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i>Cerrar Sesión</a>
+			</div>
+		</nav>
+		<div class="content">
+			{% block content %}{% endblock %}
+		</div>
+	</body>
+</html>

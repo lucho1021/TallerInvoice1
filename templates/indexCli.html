@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block titulo %} Clientes y Factura {% endblock %}
+{% block contenido %}
+
+<nav class="navtop">
+	<div>
+		<h1>Web Invoice</h1>
+		<a href="{{ url_for('indexFac') }}"><i class="fad fa-users"></i>Facturas</a>
+		<a href="{{ url_for('indexCli') }}"><i class="fad fa-users"></i>Clientes</a>
+    <a href="{{ url_for('home') }}"><i class="fas fa-home"></i>Home</a>
+		<a href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i>Cerrar Sesión</a>
+	</div>
+</nav>
+
+<div class="container">
+    <section class="section">
+        <div class="columns">
+            <div class="column">
+                <h3 class="is-size-3">Cliente</h3>
+                <p>Nombre de Usuario: {{ account['name'] }}</p>
+                <a href="{{url_for('form_add_cliente')}}" class="btn btn-primary">Agregar Cliente</a>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Nombre</th>
+                            <th>Status</th>
+                            <th>Mobile</th>
+                            <th>Editar</th>
+                            <th>Eliminar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for customer in customers %}
+                        <tr>
+                            <td>{{customer[0]}}</td>                       
+                            <td>{{customer[1]}}</td>
+                            <td>{{customer[2]}}</td>
+                            <td>{{customer[3]}}</td>
+                            <td>
+                                {# Pasar el id (lo que hay en cliente[0] #}
+                                {# Se guarda para los que tienen parametros #}
+                                <a href="{{url_for('edit_cliente', id=customer[0])}}"
+                                    class="btn btn-success">Editar</a>
+                            </td>
+                            <td>
+                                {# se utiliza el metodo request.form #}
+                                <form action="{{url_for('delete_cliente')}}" method="POST" onSubmit="return confirm('Está seguro de eliminar este cliente?');">
+                                    <input type="hidden" name="id" value="{{customer[0]}}">
+                                    <button class="btn btn-danger">Eliminar</button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block titulo %}Agregar Cliente{% endblock %}
+{% block contenido %}
+    <div class="container">
+        <section class="section">
+            <div class="columns">
+                <div class="column is-one-third">
+                    <h3 class="is-size-3">Agregar Usuario</h3>
+                    <form action="{{url_for('update_cliente')}}" method="post">
+                        <input type="hidden" name="id" value="{{customer[0]}}">
+                        <label for="name">Nombre:</label>
+                        <input required type="text" class="form-control" placeholder="Nombre" name="name" id="name"
+                        value="{{customer[1]}}">
+                        <label for="status">Status: </label>
+                        <input required type="text" class="form-control" placeholder="Status" name="status" id="status"
+                        value="{{customer[2]}}">
+                        <label for="mobile">Mobile: </label>
+                        <input required type="text" class="form-control" placeholder="Mobile" name="mobile" id="mobile"
+                        value="{{customer[3]}}">
+                        <br>
+                        <button type="submit" class="btn btn-success">Guardar</button>
+                        <a href="{{url_for('indexCli')}}" class="btn btn-primary">Volver</a>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock %}
